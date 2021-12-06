@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  base: &base
+    container_name: incubator_base
+    working_dir: /app/output
+    build: .
+    command: [ "java", "--version" ]
+
+  server:
+    <<: *base
+    container_name: server
+    command: [ "java", "com.Manager" ]
+
+  monitor:
+    <<: *base
+    container_name: monitor
+    command: [ "java", "com.Monitor" ]
+
+  temperature:
+    <<: *base
+    container_name: temperature
+    command: [ "java", "com.sensors.TemperatureSensor" ]
+
+  oxygen:
+    <<: *base
+    container_name: oxygen
+    command: [ "java", "com.sensors.OxygenSensor" ]
+
+  humidity:
+    <<: *base
+    container_name: humidity
+    command: [ "java", "com.sensors.HumiditySensor" ]
+
+  heartbeat:
+    <<: *base
+    container_name: heartbeat
+    command: [ "java", "com.sensors.HeartBeatSensor" ]
+
+  aircirculator:
+    <<: *base
+    container_name: aircirculator
+    command: [ "java", "com.actuators.AirCirculatorActuator" ]
+
+  heater:
+    <<: *base
+    container_name: heater
+    command: [ "java", "com.actuators.HeaterActuator" ]
+
+  humidifier:
+    <<: *base
+    container_name: humidifier
+    command: [ "java", "com.actuators.HumidifierActuator" ]
